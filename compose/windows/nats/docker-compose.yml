@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  nats:
+    container_name: nats
+    hostname: nats
+    image: nats
+    restart: always
+    network_mode: "bridge"
+    environment:
+      - DNSDOCK_ALIAS=nats
+

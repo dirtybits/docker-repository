@@ -1,0 +1,19 @@
+version: '3'
+
+# route /P add 172.0.0.0 MASK 255.0.0.0 10.0.75.2
+# docker-compose run -d --service-ports --name dnsdock dnsdock
+# add 127.0.0.1 as DNS server on dev machine
+# ipconfig /flushdns
+# http://dnsdock.docker/services
+# https://github.com/aacebedo/dnsdock
+
+services:
+  dnsdock:
+    container_name: dnsdock
+    image: aacebedo/dnsdock:latest-amd64
+    restart: always
+    network_mode: "bridge"
+    ports:
+      - 53:53/udp
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Yekaterinburg
+    volumes:
+      - /media/download/In/DelugeConfig:/config
+      - /media/download/In/Temp:/tmp
+      - /media/download/In:/root/Downloads
+    restart: unless-stopped
+
+
+

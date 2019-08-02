@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  samba:
+    container_name: samba
+    hostname: samba
+    image: dperson/samba
+    command: -u "root;root" -s "FileServer;/media;yes;no;no;all;root" -s "Projects;/projects;yes;no;no;all;root" -s "System;/system;yes;no;no;all;root"
+    restart: always
+    network_mode: "bridge"
+    volumes:
+     - "cn-catalyst-volume:/projects/catalyst-pool"
+    environment:
+     - GROUPID=0
+     - USERID=0
+
+volumes:
+  cn-catalyst-volume:
+    external: true
+
+

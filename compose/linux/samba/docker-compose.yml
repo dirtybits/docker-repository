@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  samba:
+    container_name: samba
+    hostname: samba
+    image: dperson/samba
+    command: -u "root;root" -s "FileServer;/media;yes;no;no;all;root" -s "Projects;/projects;yes;no;no;all;root" -s "System;/system;yes;no;no;all;root"
+    restart: always
+    network_mode: "bridge"
+    ports:
+     - "139:139"
+     - "445:445"
+    volumes:
+     - "node-projects-volume:/projects/node-projects"
+     - "powershell-projects-volume:/projects/powershell-projects"
+     - "cn-catalyst-volume:/projects/catalyst-pool"
+     - "/system:/system"
+     - "/media/storage:/media/Storage"
+     - "/media/download:/media/Download"
+    environment:
+     - GROUPID=0
+     - USERID=0
+
+volumes:
+  node-projects-volume:
+    external: true
+  powershell-projects-volume:
+    external: true
+  cn-catalyst-volume:
+    external: true
+
+
